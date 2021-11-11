@@ -18,7 +18,7 @@
 		function init() {
 			//INICIALIZACIÓN DE LA ESCENA
 			scene = new THREE.Scene();
-      scene.background = new THREE.Color( 0xAAAAAA );
+      scene.background = new THREE.Color( 0xFFFFFF );
 			aspect = window.innerWidth / window.innerHeight;
 			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
 			renderer = new THREE.WebGLRenderer();
@@ -59,11 +59,16 @@
       var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
       var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
       
-      var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-      var geometry = new THREE.CubeGeometry(2, 2, 2);
-      // Create the final object to add to the scene
-      var boxObject = new THREE.Mesh( geometry, material );
-      scene.add( boxObject );
+      //GENERA EL CONO Y LE ASIGNA EL MATERIAL
+      const geometry = new THREE.ConeGeometry( 1, 1, 10 );
+	  const material = new THREE.MeshNormalMaterial( {color: 0xFF5DA2} );
+	  const cone = new THREE.Mesh( geometry, material );
+	  scene.add( cone );
+	  
+	  //ROTA Y TRASLADA EL CONO
+	  cone.geometry.rotateZ(-Math.PI/2);
+	  cone.geometry.translate(0.5,0,0);
+
                
 	  	//AGREGAR A LA ESCENA
       scene.add( gridHelperXZ );
